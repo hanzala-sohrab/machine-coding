@@ -4,27 +4,36 @@ This repository contains various machine coding exercises and implementations.
 
 ## Project Structure
 
-```
 machine-coding/
-├── README.md                    # This file - project overview
-├── .gitignore                   # Git ignore rules
-└── multilevel-cache-design/     # Multilevel cache system implementation
-    ├── README.md               # Detailed documentation for the cache system
-    ├── main.py                 # Example usage and demo
-    ├── multilevel_cache.py     # Main cache implementation
-    ├── cache_level.py          # Individual cache level implementation
-    ├── eviction_strategy.py    # Eviction strategies (LRU, FIFO, etc.)
-    ├── pyproject.toml          # Project configuration
-    └── __init__.py             # Python package initialization
-```
+├── README.md # This file - project overview
+├── .gitignore # Git ignore rules
+├── multilevel-cache-design/ # Multilevel cache system implementation
+│ ├── README.md # Detailed documentation for the cache system
+│ ├── main.py # Example usage and demo
+│ ├── multilevel_cache.py # Main cache implementation
+│ ├── cache_level.py # Individual cache level implementation
+│ ├── eviction_strategy.py # Eviction strategies (LRU, FIFO, etc.)
+│ ├── pyproject.toml # Project configuration
+│ └── **init**.py # Python package initialization
+└── restaurant-booking-system-design/ # Restaurant booking system implementation
+├── README.md # Detailed documentation for the booking system
+├── main.py # Example usage and demo
+├── booking_system.py # Main booking system implementation
+├── models.py # Data models (Venue, Booking, etc.)
+├── errors.py # Custom exception classes
+├── demo.py # Demo scripts for testing
+├── pyproject.toml # Project configuration
+└── **init**.py # Python package initialization
 
-## Featured Project: Multilevel Cache System
+## Featured Projects
 
-### Overview
+### 1. Multilevel Cache System
+
+#### Overview
 
 The multilevel cache system is a sophisticated caching implementation that stores key-value pairs across multiple cache levels. It's designed to optimize data access patterns by keeping frequently accessed data in faster, higher-level caches while maintaining larger storage capacity in lower levels.
 
-### Key Features
+#### Key Features
 
 - **Multi-level Architecture**: Supports configurable number of cache levels (L1, L2, ..., Ln)
 - **Dynamic Level Management**: Automatically adds new levels when needed, up to a configured maximum
@@ -33,27 +42,20 @@ The multilevel cache system is a sophisticated caching implementation that store
 - **Cascading Eviction**: When a level is full, evicted items cascade down to lower levels
 - **Comprehensive Operations**: Supports READ, WRITE, and DELETE operations
 
-### Core Operations
+#### Core Operations
 
 1. **READ KEY**: Searches from L1 to Ln, promotes found items to L1
 2. **WRITE KEY VALUE**: Always writes to L1, cascades evictions through levels
 3. **DELETE KEY**: Removes the key from all levels where it exists
 
-### Technical Implementation
+#### Technical Implementation
 
 - **Language**: Python 3.12+
 - **Architecture**: Object-oriented design with clear separation of concerns
 - **Dependencies**: No external dependencies - pure Python implementation
 - **Testing**: Example usage provided in `main.py`
 
-## Getting Started
-
-### Prerequisites
-
-- Python 3.12 or higher
-- `uv` package manager (recommended) or pip
-
-### Setup
+#### Getting Started
 
 1. Navigate to the multilevel cache project:
 
@@ -74,7 +76,7 @@ The multilevel cache system is a sophisticated caching implementation that store
    python main.py
    ```
 
-### Example Usage
+#### Example Usage
 
 ```python
 from multilevel_cache import MultiLevelCache
@@ -94,36 +96,88 @@ value = cache.read("b")
 cache.delete("a")
 ```
 
-## Documentation
+### 2. Restaurant Booking System
 
-For detailed documentation of the multilevel cache system, including:
+#### Overview
 
-- Complete problem statement
-- Detailed requirements
-- Implementation details
-- API reference
+The restaurant booking system is a comprehensive in-memory booking platform similar to Zomato/DineOut. It supports restaurant registration, time slot management, restaurant search with multiple filters, and concurrency-safe table bookings. The system is designed to be modular and extensible for future enhancements like hotel bookings.
 
-Please refer to the [multilevel-cache-design/README.md](multilevel-cache-design/README.md) file.
+#### Key Features
 
-## Learning Objectives
+- **Restaurant Management**: Register restaurants with metadata (name, city, area, cuisine, cost-for-two, etc.)
+- **Time Slot Management**: Restaurant owners can publish available time slots with table counts
+- **Advanced Search**: Search restaurants by multiple filters (city, area, cuisine, name, cost range, veg-only, etc.)
+- **Concurrency-Safe Booking**: Thread-safe table booking using per-slot locking to prevent double-booking
+- **Booking Window**: Configurable booking window (e.g., bookings allowed only up to 30 days in advance)
+- **Error Handling**: Comprehensive exception handling with custom error types
+- **Modular Design**: Clean separation of concerns for easy testing and extension
 
-This implementation demonstrates several important computer science concepts:
+#### Core Operations
 
-- **Cache Hierarchies**: Understanding multi-level cache systems
-- **Eviction Algorithms**: Implementing LRU, FIFO, and other strategies
-- **Data Structures**: Efficient storage and retrieval mechanisms
-- **System Design**: Scalable and maintainable architecture
-- **Algorithm Design**: Complex operation handling with edge cases
+1. **Register Restaurant**: Add a new restaurant to the system
+2. **Update Time Slots**: Set available time slots and table counts for a restaurant
+3. **Search restaurants**: Find restaurants using various filters and custom criteria
+4. **Book Table**: Reserve a table for a specific time slot with concurrency protection
 
-## Contributing
+#### Technical Implementation
 
-This repository is intended for learning and demonstration purposes. Feel free to:
+- **Language**: Python 3.12+
+- **Architecture**: Object-oriented design with threading support
+- **Concurrency**: Uses reentrant locks and per-slot locking for thread safety
+- **Dependencies**: No external dependencies - pure Python implementation
+- **Testing**: Comprehensive demo scripts in `demo.py`
 
-1. Explore the implementations
-2. Run the examples
-3. Modify and experiment with the code
-4. Add new features or improvements
+#### Getting Started
 
-## License
+1. Navigate to the restaurant booking system project:
 
-This project is for educational purposes. Feel free to use and modify the code for learning.
+   ```bash
+   cd restaurant-booking-system-design
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   uv sync
+   # or
+   pip install -e .
+   ```
+
+3. Run the demo:
+   ```bash
+   python main.py
+   ```
+
+#### Example Usage
+
+```python
+from booking_system import BookingSystem
+from models import Venue
+from datetime import datetime, date, timedelta
+
+# Initialize booking system
+system = BookingSystem(booking_window_days=30)
+
+# Register a restaurant
+venue = Venue(
+    id="venue_123",
+    name="Italian Bistro",
+    city="New York",
+    area="Manhattan",
+    cuisine="Italian",
+    is_veg=False,
+    cost_for_two=100
+)
+system.register_venue(venue)
+
+# Set up time slots
+tomorrow = date.today() + timedelta(days=1)
+slot_dt = datetime.combine(tomorrow, datetime.min.time().replace(hour=20))
+system.update_time_slots(venue.id, [slot_dt], tables_each=5)
+
+# Search restaurants
+results = system.search_venues(city="New York", cuisine="Italian")
+
+# Book a table
+booking = system.book_table("user_456", venue.id, slot_dt, num_people=4)
+```
