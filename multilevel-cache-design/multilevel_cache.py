@@ -10,7 +10,7 @@ class MultiLevelCache:
         capacities: list[int],
         strategy_cls: Type[EvictionStrategy] = LFUStrategy,
     ):
-        self.levels = []
+        self.levels: list[CacheLevel] = []
         self.max_levels = max_levels
         self.capacities = capacities
         self.strategy_cls = strategy_cls
