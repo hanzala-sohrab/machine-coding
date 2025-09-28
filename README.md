@@ -4,6 +4,7 @@ This repository contains various machine coding exercises and implementations.
 
 ## Project Structure
 
+```markdown
 machine-coding/
 ├── README.md # This file - project overview
 ├── .gitignore # Git ignore rules
@@ -24,6 +25,7 @@ machine-coding/
 ├── demo.py # Demo scripts for testing
 ├── pyproject.toml # Project configuration
 └── **init**.py # Python package initialization
+```
 
 ## Featured Projects
 
