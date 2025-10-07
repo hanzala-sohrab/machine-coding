@@ -11,24 +11,24 @@ machine-coding/
 ├── multilevel-cache-design/ # Multilevel cache system implementation
 │  ├── README.md # Detailed documentation for the cache system
 │  ├── main.py # Example usage and demo
-│  ├── multilevel\_cache.py # Main cache implementation
-│  ├── cache\_level.py # Individual cache level implementation
-│  ├── eviction\_strategy.py # Eviction strategies (LRU, FIFO, etc.)
+│  ├── multilevel_cache.py # Main cache implementation
+│  ├── cache_level.py # Individual cache level implementation
+│  ├── eviction_strategy.py # Eviction strategies (LRU, FIFO, etc.)
 │  ├── pyproject.toml # Project configuration
-│  └── \_\_init\_\_.py # Python package initialization
-└── restaurant-booking-system-design/ \# Restaurant booking system implementation
+│  └── __init__.py # Python package initialization
+├── restaurant-booking-system-design/ # Restaurant booking system implementation
 │  ├── README.md # Detailed documentation for the booking system
 │  ├── main.py # Example usage and demo
-│  ├── booking\_system.py # Main booking system implementation
+│  ├── booking_system.py # Main booking system implementation
 │  ├── models.py # Data models (Venue, Booking, etc.)
 │  ├── errors.py # Custom exception classes
 │  ├── demo.py # Demo scripts for testing
 │  ├── pyproject.toml # Project configuration
-│  └── \_\_init\_\_.py # Python package initialization
+│  └── __init__.py # Python package initialization
 └── task-management-system-design/ # Task management system implementation
    ├── README.md # Detailed documentation for the task system
    ├── main.py # Example usage and demo
-   ├── task\_manager.py # Main task management implementation
+   ├── task_manager.py # Main task management implementation
    ├── models.py # Data models (Task, User, etc.)
    ├── auth.py # Authentication and session management
    ├── entities.py # Data models (Task, User, etc.)
