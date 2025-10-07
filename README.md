@@ -9,25 +9,36 @@ machine-coding/
 ├── README.md # This file - project overview
 ├── .gitignore # Git ignore rules
 ├── multilevel-cache-design/ # Multilevel cache system implementation
-│ ├── README.md # Detailed documentation for the cache system
-│ ├── main.py # Example usage and demo
-│ ├── multilevel_cache.py # Main cache implementation
-│ ├── cache_level.py # Individual cache level implementation
-│ ├── eviction_strategy.py # Eviction strategies (LRU, FIFO, etc.)
-│ ├── pyproject.toml # Project configuration
-│ └── **init**.py # Python package initialization
-└── restaurant-booking-system-design/ # Restaurant booking system implementation
-├── README.md # Detailed documentation for the booking system
-├── main.py # Example usage and demo
-├── booking_system.py # Main booking system implementation
-├── models.py # Data models (Venue, Booking, etc.)
-├── errors.py # Custom exception classes
-├── demo.py # Demo scripts for testing
-├── pyproject.toml # Project configuration
-└── **init**.py # Python package initialization
+│  ├── README.md # Detailed documentation for the cache system
+│  ├── main.py # Example usage and demo
+│  ├── multilevel\_cache.py # Main cache implementation
+│  ├── cache\_level.py # Individual cache level implementation
+│  ├── eviction\_strategy.py # Eviction strategies (LRU, FIFO, etc.)
+│  ├── pyproject.toml # Project configuration
+│  └── \_\_init\_\_.py # Python package initialization
+└── restaurant-booking-system-design/ \# Restaurant booking system implementation
+│  ├── README.md # Detailed documentation for the booking system
+│  ├── main.py # Example usage and demo
+│  ├── booking\_system.py # Main booking system implementation
+│  ├── models.py # Data models (Venue, Booking, etc.)
+│  ├── errors.py # Custom exception classes
+│  ├── demo.py # Demo scripts for testing
+│  ├── pyproject.toml # Project configuration
+│  └── \_\_init\_\_.py # Python package initialization
+└── task-management-system-design/ # Task management system implementation
+   ├── README.md # Detailed documentation for the task system
+   ├── main.py # Example usage and demo
+   ├── task\_manager.py # Main task management implementation
+   ├── models.py # Data models (Task, User, etc.)
+   ├── auth.py # Authentication and session management
+   ├── entities.py # Data models (Task, User, etc.)
+   ├── pyproject.toml # Project configuration
+   └── __init__.py # Python package initialization
 ```
 
 ## Featured Projects
+
+
 
 ### 1. Multilevel Cache System
 
@@ -183,3 +194,87 @@ results = system.search_venues(city="New York", cuisine="Italian")
 # Book a table
 booking = system.book_table("user_456", venue.id, slot_dt, num_people=4)
 ```
+
+### 3. Task Management System
+
+#### Overview
+
+A robust task management system with user authentication, task CRUD operations, and session management.
+
+#### Key Features
+
+- **User Authentication**: Secure login/logout functionality
+- **Task Management**: Create, read, update, and delete tasks
+- **Session Management**: Secure session handling with expiration
+- **Error Handling**: Comprehensive error handling and validation
+- **Thread Safety**: Thread-safe operations for concurrent access
+
+#### Core Components
+
+- **User Management**: User registration, login, and session handling
+- **Task Operations**: Create, read, update, and delete tasks with various statuses
+- **Session Management**: Secure session handling with configurable timeouts
+
+#### Technical Implementation
+
+- **Language**: Python 3.12+
+- **Architecture**: Object-oriented design with clear separation of concerns
+- **Dependencies**: No external dependencies - pure Python implementation
+- **Security**: Secure password hashing and session management
+
+#### Getting Started
+
+1. Navigate to the task management project:
+
+   ```bash
+   cd task-management-system-design
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   uv sync
+   # or
+   pip install -e .
+   ```
+
+3. Run the example:
+   ```bash
+   python main.py
+   ```
+
+#### Example Usage
+
+```python
+from task_manager import TaskManager
+from models import User, Task
+
+# Initialize task manager
+task_manager = TaskManager()
+
+# User registration
+user = task_manager.register("username", "password")
+
+# User login
+session_id = task_manager.login("username", "password")
+
+# Create a new task
+task = task_manager.create_task(session_id, "Complete project", "Finish all pending tasks")
+
+# Get all tasks
+tasks = task_manager.get_tasks(session_id)
+
+# Update task status
+task_manager.update_task_status(session_id, task.task_id, "COMPLETED")
+
+# User logout
+task_manager.logout(session_id)
+```
+
+## Contributing
+
+Feel free to contribute to any of the projects by submitting issues or pull requests. Please follow the existing code style and include appropriate tests.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
