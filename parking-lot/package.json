@@ -1,0 +1,12 @@
+{
+  "name": "parking-lot",
+  "version": "1.0.0",
+  "description": "Parking Lot",
+  "license": "ISC",
+  "author": "Hanzala Sohrab",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "start": "node --experimental-transform-types index.ts"
+  }
+}
