@@ -11,6 +11,7 @@ class FirstAvailableStrategy implements ParkingStrategy {
         return spot;
       }
     }
+    return undefined;
   }
 }
 

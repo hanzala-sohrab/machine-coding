@@ -19,7 +19,7 @@ class ParkingLot {
 
     spot.park(vehicle);
     const ticket = new Ticket(
-      `T-${Date.now()}`,
+      `T-${crypto.randomUUID()}`,
       vehicle,
       spot,
       new Date(),
